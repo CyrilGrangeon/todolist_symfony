@@ -1,9 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TodoController!{% endblock %}
+{% block title %}Todolist{% endblock %}
 
 {% block body %}
 
-
+    
+    <table>
+    <tr>
+        <th>Titre</th>
+        <th>Contenu</th>
+        <th>Réalisée</th>
+        <th>Date d'ajout </th>
+        <th>Date de réalisation</th>
+    </tr>
+    {% for todo in todos %}
+        <tr>
+            <td>{{ todo.title }}</td>
+            <td>{{ todo.content }}</td>
+            <td>{{ todo.isDone }}</td>
+            <td>{{ todo.createdAt|date('d/m/Y H:i') }}</td>
+            <td>{{ todo.doneAt|date('d/m/Y H:i') }}</td>
+        </tr>
+    {% endfor %}
+    </table>
 
 {% endblock %}

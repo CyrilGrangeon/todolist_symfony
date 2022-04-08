@@ -14,7 +14,13 @@
             
         {% endblock %}
     </head>
+
     <body>
+        <div class="topnav" id="myTopnav">
+            <a href="{{ path('home') }}">Accueil</a>
+            <a href="{{ path('todolist') }}">Todolist</a>
+        </div>
+
         {% block body %}{% endblock %}
     </body>
 </html>
