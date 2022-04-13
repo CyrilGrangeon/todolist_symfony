@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    
+    <div class="responsive">
     <table>
     <tr>
         <th>Titre</th>
@@ -15,7 +15,7 @@
     </tr>
     {% for todo in todos %}
         <tr>
-            <td>{{ todo.title }}</td>
+            <td class="title">{{ todo.title }}</td>
             <td>{{ todo.content }}</td>
             <td>{{ todo.createdAt|date('d/m/Y, H:i') }}</td>
             
@@ -32,5 +32,6 @@
         </tr>
     {% endfor %}
     </table>
+    </div>
 
 {% endblock %}
