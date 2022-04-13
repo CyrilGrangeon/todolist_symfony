@@ -14,9 +14,9 @@ class TodoFixtures extends Fixture
         $todo = new Todo();
         $todo->setTitle('title'.$i);
         $todo->setContent('content'.$i);
-        $todo->setIsDone('is_done'.$i);
+        $todo->setIsDone(0);
         $todo->setCreatedAt(new \DateTimeImmutable());
-        $todo->setDoneAt(new \DateTimeImmutable());
+        $todo->setDoneAt(NULL);
 
         $manager->persist($todo);
         $manager->flush();

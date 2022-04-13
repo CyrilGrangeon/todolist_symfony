@@ -9,17 +9,26 @@
     <tr>
         <th>Titre</th>
         <th>Contenu</th>
-        <th>Réalisée</th>
         <th>Date d'ajout </th>
         <th>Date de réalisation</th>
+        <th>Action</th>
     </tr>
     {% for todo in todos %}
         <tr>
             <td>{{ todo.title }}</td>
             <td>{{ todo.content }}</td>
-            <td>{{ todo.isDone }}</td>
-            <td>{{ todo.createdAt|date('d/m/Y H:i') }}</td>
-            <td>{{ todo.doneAt|date('d/m/Y H:i') }}</td>
+            <td>{{ todo.createdAt|date('d/m/Y, H:i') }}</td>
+            
+            <td>
+            {% if todo.doneAt != NULL %}{{ todo.doneAt|date('d/m/Y, H:i') }}{% else %}
+            Non réalisée
+            {% endif %}
+                
+            </td>
+            <td>
+                <a href="{{ path('todo-delete', { id: todo.id }) }}">Supprimmer</a>
+                <a href="{{ path('todo-edit', { id: todo.id }) }}">Modifier</a>
+            </td>
         </tr>
     {% endfor %}
     </table>

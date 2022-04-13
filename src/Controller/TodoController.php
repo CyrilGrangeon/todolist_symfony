@@ -6,7 +6,7 @@ use App\Form\TodoType;
 use Exception;
 use App\Entity\Todo;
 use App\Repository\TodoRepository;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,9 +42,13 @@ class TodoController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             
-            $todo->setIsDone(false);
+            
             $todo->setCreatedAt(new \DateTimeImmutable());
-            $todo->setDoneAt(new \DateTimeImmutable());
+            dump($todo->getIsDone());
+            if($todo->getIsDone() == true){
+                $todo->setDoneAt(new \DateTimeImmutable());
+            }
+            
             
             $em->persist($todo);
 
@@ -68,5 +72,31 @@ class TodoController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+    
+    #[Route('/supprimer-todo/{id}', name: 'todo-delete')]
+    public function delete(Todo $todo, EntityManagerInterface $em): Response
+    {
+       $em->remove($todo);
+       $em->flush();
+
+       return $this->redirectToRoute('todolist');
+    }
+
+    #[Route('/modifier-todo/{id}', name: 'todo-edit')]
+    public function edit(Todo $todo, Request $request, EntityManagerInterface $em): Response
+    {
+       $form = $this->createForm(TodoType::class, $todo);
+       $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $todo->setCreatedAt(new \DateTimeImmutable());
+            $em->flush();
+            return $this->redirectToRoute('todolist');
+        }
+       return $this->render('todo/edit-todo.html.twig', [
+           'form' => $form->createView()
+       ]);
+    }
+
+    
 
 }

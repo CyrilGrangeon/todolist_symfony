@@ -1,6 +1,15 @@
 {{ form_start(form) }}
     {{ form_row(form.title, {'attr': {'class':'form-control'}, 'label':'Titre :' })}}
     {{ form_row(form.content, {'attr':{'class' : 'form-control'}, 'label': 'Contenu'})}}
+
+    {{ form_row(form.is_done, {'attr':{'class':'form-check-imput'}, 'label': 'Tâche réalisée  ? '})}}
+    {# {% if (form.isDone != NULL ) %}
+        {{ form.isDone }}
+        {% else %}
+        Non réalisée
+    {% endif %} }} #}
+
+    
     
 
     

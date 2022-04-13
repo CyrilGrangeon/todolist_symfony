@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class TodoType extends AbstractType
@@ -43,6 +44,10 @@ class TodoType extends AbstractType
                     ]),
                 ]
             ])
+
+            ->add('is_done', CheckboxType::class, [
+                'required' => false
+            ]);
             
         ;
     }
