@@ -45,6 +45,14 @@ class TodoRepository extends ServiceEntityRepository
         }
     }
 
+    public function findCustom(bool $order, $category){
+        
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.is_done = :order')
+            ->setParameter('order', $order)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Todo[] Returns an array of Todo objects
     //  */

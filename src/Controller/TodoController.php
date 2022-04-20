@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\Form\TodoType;
 use Exception;
 use App\Entity\Todo;
-use App\Repository\TodoRepository;
+use App\Form\TodoType;
 use DateTimeImmutable;
+use App\Form\FilterType;
+use App\Repository\TodoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,12 +18,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TodoController extends AbstractController
 {
     #[Route('/todo', name: 'todolist')]
-    public function todo(TodoRepository $repo): Response
+    public function todo(Request $request, TodoRepository $repo): Response
     {
-        
+        $filter = $this->createForm(FilterType::class);
+        $filter->handleRequest($request);
         $todos = $repo->findAll();
+        if($filter->isSubmitted() && $filter->isValid()){
+            $category = $filter['categorie']->getData();
+            $order = $filter['realisee']->getData()??true;
+            
+            $todos = $repo->findCustom($order, $category);
+            
+        }
+           
         return $this->render('todo/todolist.html.twig', [
-            'todos' => $todos
+            'todos' => $todos,
+            'filter' => $filter->createView()
         ]);
     }
 

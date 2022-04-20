@@ -3,7 +3,10 @@
 {% block title %}Todolist{% endblock %}
 
 {% block body %}
-
+{{ form_start(filter) }}
+    {{ form_widget(filter) }}
+    <button type="submit" >Soumettre</button>
+{{ form_end(filter) }}
     <div class="responsive">
     <table>
     <tr>

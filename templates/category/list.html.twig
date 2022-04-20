@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les catégories{% endblock %}
+
+{% block body %}
+{{ form_start(filter) }}
+    {{ form_widget(filter) }}
+    <button type="submit" >Soumettre</button>
+{{ form_end(filter) }}
+    <div class="responsive">
+    <table>
+    <tr>
+        <th>Nom de la categorie</th>
+        
+    </tr>
+    
+        <tr>
+            <td class="title">{{ category.title }}</td>
+                
+            
+            <td>
+                <a href="{{ path('category-delete', { id: todo.id }) }}">Supprimmer</a>
+                <a href="{{ path('category-edit', { id: todo.id }) }}">Modifier</a>
+            </td>
+        </tr>
+    </table>
+    </div>
+
+{% endblock %}

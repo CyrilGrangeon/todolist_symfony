@@ -17,6 +17,7 @@ class TodoFixtures extends Fixture
         $todo->setIsDone(0);
         $todo->setCreatedAt(new \DateTimeImmutable());
         $todo->setDoneAt(NULL);
+        $todo->setCategory($this->getReference("cat-$i"));
 
         $manager->persist($todo);
         $manager->flush();

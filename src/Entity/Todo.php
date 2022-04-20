@@ -28,6 +28,9 @@ class Todo
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $done_at;
 
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'todos')]
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class Todo
     public function setDoneAt(?\DateTimeImmutable $done_at): self
     {
         $this->done_at = $done_at;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
