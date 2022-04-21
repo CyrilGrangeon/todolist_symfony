@@ -23,7 +23,7 @@
             <td>{{ todo.createdAt|date('d/m/Y, H:i') }}</td>
             
             <td>
-            {% if todo.doneAt != NULL %}{{ todo.doneAt|date('d/m/Y, H:i') }}{% else %}
+            {% if todo.isDone is same as(TRUE) %}Réalisée{% else %}
             Non réalisée
             {% endif %}
                 

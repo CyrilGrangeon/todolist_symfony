@@ -23,8 +23,8 @@ class FilterType extends AbstractType
             ])
             ->add('realisee', ChoiceType::class, [
                 'choices' => [
-                    'Non réalisées' => true,
-                    'Réalisées' => false
+                    'Non réalisées' => false,
+                    'Réalisées' => true
                 ],
                 'mapped' => false,
                 'attr' => ['class' => 'form-control'],

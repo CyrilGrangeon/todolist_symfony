@@ -3,10 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Todo;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
+use App\Entity\Category;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Todo|null find($id, $lockMode = null, $lockVersion = null)
@@ -45,13 +46,26 @@ class TodoRepository extends ServiceEntityRepository
         }
     }
 
-    public function findCustom(bool $order, $category){
+    public function findCustom( $category, $order){
+        $query = $this->createQueryBuilder('p');
         
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.is_done = :order')
-            ->setParameter('order', $order)
-            ->getQuery()
-            ->getResult();
+
+        if($category !==null)
+        {
+            
+            $query = $query->andWhere('p.category = :category');
+            $query->setParameter('category', $category);
+        }
+        if($order !== null)
+        {
+            $query = $query->andWhere('p.is_done = :order');
+            $query->setParameter('order', $order);
+        }
+
+        $finalQuery = $query->getQuery()
+        ->getResult();
+       
+        return $finalQuery;
     }
     // /**
     //  * @return Todo[] Returns an array of Todo objects

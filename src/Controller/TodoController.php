@@ -27,7 +27,7 @@ class TodoController extends AbstractController
             $category = $filter['categorie']->getData();
             $order = $filter['realisee']->getData()??true;
             
-            $todos = $repo->findCustom($order, $category);
+            $todos = $repo->findCustom($category, $order);
             
         }
            

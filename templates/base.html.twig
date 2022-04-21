@@ -7,7 +7,7 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{asset('assets/scss/style.css')}}">
-        <script defer src="public\assets\js\burger.js"></script>
+        <script defer src="{{asset('assets/js/burger.js')}}"></script>
         {% block stylesheets %}
             
 
@@ -20,13 +20,21 @@
 
     <body>
         <div class="topnav" id="myTopnav">
-            <a href="{{ path('home') }}">Accueil</a>
-            <a href="{{ path('todolist') }}">Todolist</a>
-            <a href="{{ path('todo-new') }}">Ajouter une chose à faire</a>
-            <a href="javascript:void(0);" class="icon" onclick="burger()">
-                <i class="fa fa-bars"></i>
-            </a>
+            
+            {% if app.user %}
+                <a href="{{ path('todolist') }}">Todolist</a>
+                <a href="{{ path('todo-new') }}">Ajouter une chose à faire</a>
+                <a href="{{ path('app_logout') }}">Deconnection</a>
+                
+            {% else %}
+                <a href="javascript:void(0);" class="icon" onclick="burger()"></a>
+                <a href="{{ path('home') }}">Accueil</a>
+                <a href="{{ path('app_register') }}">Inscription</a>
+                <a href="{{ path('app_login') }}">Connection</a>
+                    <i class="fa fa-bars"></i>
+                
         </div>
+        {% endif %}
 
         {% block body %}{% endblock %}
     </body>
