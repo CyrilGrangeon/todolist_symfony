@@ -31,6 +31,7 @@
             <td>
                 <a href="{{ path('todo-delete', { id: todo.id }) }}">Supprimmer</a>
                 <a href="{{ path('todo-edit', { id: todo.id }) }}">Modifier</a>
+                <a href="{{ path('app_mailer', { id: todo.id }) }}">Envoyer par mail</a>
             </td>
         </tr>
     {% endfor %}

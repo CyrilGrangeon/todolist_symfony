@@ -13,6 +13,7 @@ class CategoryFixtures extends Fixture
         for($i = 0; $i < 20; $i++){
             $category = new Category();
             $category->setName('name'.$i);
+            $category->setImage('default.png');
             $this->addReference("cat-$i", $category);
             $manager->persist($category);
         }

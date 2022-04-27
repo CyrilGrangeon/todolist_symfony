@@ -24,6 +24,8 @@
             {% if app.user %}
                 <a href="{{ path('todolist') }}">Todolist</a>
                 <a href="{{ path('todo-new') }}">Ajouter une chose à faire</a>
+                <a href="{{ path('category-list') }}">Liste des categorie</a>
+                <a href="{{ path('category-new') }}">Créer une categorie</a>
                 <a href="{{ path('app_logout') }}">Deconnection</a>
                 
             {% else %}
